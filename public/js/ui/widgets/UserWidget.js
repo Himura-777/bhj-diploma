@@ -5,24 +5,39 @@
  * */
 
 class UserWidget {
-  /**
-   * Устанавливает полученный элемент
-   * в свойство element.
-   * Если переданный элемент не существует,
-   * необходимо выкинуть ошибку.
-   * */
-  constructor(element){
+	/**
+	 * Устанавливает полученный элемент
+	 * в свойство element.
+	 * Если переданный элемент не существует,
+	 * необходимо выкинуть ошибку.
+	 * */
+	constructor(element) {
+		if (!element) {
+			throw new Error("Ошибка");
+		}
 
-  }
+		this.element = element;
+	}
 
-  /**
-   * Получает информацию о текущем пользователе
-   * с помощью User.current()
-   * Если пользователь авторизован,
-   * в элемент .user-name устанавливает имя
-   * авторизованного пользователя
-   * */
-  update(){
+	/**
+	 * Получает информацию о текущем пользователе
+	 * с помощью User.current()
+	 * Если пользователь авторизован,
+	 * в элемент .user-name устанавливает имя
+	 * авторизованного пользователя
+	 * */
+	update() {
+		const currentUser = User.current();
 
-  }
+		if (currentUser && currentUser.name) {
+			const userNameElement = this.element.querySelector(".user-name");
+			if (userNameElement) {
+				userNameElement.textContent = currentUser.name;
+			} else {
+				console.warn(
+					"Элемент .user-name не найден внутри элемента UserWidget."
+				);
+			}
+		}
+	}
 }
