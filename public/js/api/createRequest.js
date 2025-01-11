@@ -24,12 +24,8 @@ const createRequest = (options = {}) => {
 		}
 	}
 
-	xhr.addEventListener("readystatechange", () => {
-		if (xhr.status === 200) {
-			callback(null, xhr.response);
-		} else {
-			callback(new Error(`Ошибка: ${xhr.status} ${xhr.statusText}`), null);
-		}
+	xhr.addEventListener("load", () => {
+		callback(null, xhr.response);
 	});
 
 	xhr.open(method, finalUrl);
