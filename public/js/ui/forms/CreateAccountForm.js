@@ -15,12 +15,8 @@ class CreateAccountForm extends AsyncForm {
 
 				App.setState("user-logged");
 
-				const modal = this.element.closest(".modal");
-				if (modal) {
-					Modal.close(modal.id);
-				}
-			} else {
-				throw new Error("Ошибка");
+				const modalId = this.element.closest(".modal").dataset.modalId;
+				App.getModal(modalId).close();
 			}
 		});
 	}

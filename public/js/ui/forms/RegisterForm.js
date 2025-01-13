@@ -20,8 +20,6 @@ class RegisterForm extends AsyncForm {
 				if (modal) {
 					Modal.close(modal.id);
 				}
-			} else {
-				throw new Error("Ошибка");
 			}
 		});
 	}

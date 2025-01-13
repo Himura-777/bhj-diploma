@@ -38,11 +38,11 @@ class Sidebar {
 		const logOut = document.querySelector(".menu-item_logout");
 
 		register.addEventListener("click", () => {
-			App.getModal("modal-register").open();
+			App.getModal("register").open();
 		});
 
 		login.addEventListener("click", () => {
-			App.getModal("modal-login").open();
+			App.getModal("login").open();
 		});
 
 		logOut.addEventListener("click", () => {

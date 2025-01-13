@@ -22,12 +22,11 @@ class CreateTransactionForm extends AsyncForm {
 				const accountsList = this.element.querySelector(".accounts-select");
 				accountsList.innerHTML = "";
 
-				response.data.forEach(account => {
-					const option = document.createElement("option");
-					option.value = account.id; // Идентификатор счёта
-					option.textContent = account.name; // Название счёта
-					accountsList.appendChild(option);
-				});
+				accountsList.innerHTML = response.data.reduce((html, account) => {
+					return (
+						html + `<option value="${account.id}">${account.name}</option>`
+					);
+				}, "");
 			}
 		});
 	}
@@ -35,7 +34,7 @@ class CreateTransactionForm extends AsyncForm {
 	/**
 	 * Создаёт новую транзакцию (доход или расход)
 	 * с помощью Transaction.create. По успешному результату
-	 * вызывает App.update(), сбрасывает форму и закрывает окно,
+	 * вызывает App.update(), сбрасывает форму и закрывает окно,n
 	 * в котором находится форма
 	 * */
 	onSubmit(data) {
