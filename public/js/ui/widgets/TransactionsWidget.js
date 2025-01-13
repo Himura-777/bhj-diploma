@@ -34,7 +34,7 @@ class TransactionsWidget {
 		});
 
 		expenseButton.addEventListener("click", () => {
-			const expenseModal = App.getModal("newExpense").open();
+			App.getModal("newExpense").open();
 		});
 	}
 }
