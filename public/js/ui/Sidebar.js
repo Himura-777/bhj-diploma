@@ -46,8 +46,8 @@ class Sidebar {
 		});
 
 		logOut.addEventListener("click", () => {
-			User.logout(response => {
-				if (response.success) {
+			User.logout((err, response) => {
+				if (response && response.success) {
 					App.setState("init");
 				} else {
 					alert("Ошибка при выходе:", response.error);

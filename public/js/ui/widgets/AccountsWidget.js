@@ -34,10 +34,12 @@ class AccountsWidget {
 	 * */
 	registerEvents() {
 		this.element.addEventListener("click", () => {
-			App.getModal("createAccount").open();
-		});
+			const createAccountButton = event.target.closest(".create-account");
+			if (createAccountButton) {
+				App.getModal("createAccount").open();
+				return;
+			}
 
-		this.element.addEventListener("click", event => {
 			const accountItem = event.target.closest(".account");
 			if (accountItem) {
 				this.onSelectAccount(accountItem);
@@ -56,12 +58,15 @@ class AccountsWidget {
 	 * метода renderItem()
 	 * */
 	update() {
-		Account.list(User.current(), response => {
+		const currentUser = User.current();
+		if (!currentUser) {
+			throw new Error("Ошибка");
+		}
+
+		Account.list(currentUser, (err, response) => {
 			if (response && response.success) {
 				this.clear();
 				response.data.forEach(account => this.renderItem(account));
-			} else {
-				throw new Error("Ошибка");
 			}
 		});
 	}
@@ -88,9 +93,10 @@ class AccountsWidget {
 		this.element
 			.querySelectorAll(".account")
 			.forEach(account => account.classList.remove("active"));
+
 		element.classList.add("active");
 
-		const accountId = accountItem.dataset.id;
+		const accountId = element.dataset.id;
 		App.showPage("transactions", { account_id: accountId });
 	}
 
@@ -117,12 +123,6 @@ class AccountsWidget {
 	 * и добавляет его внутрь элемента виджета
 	 * */
 	renderItem(data) {
-		if (!Array.isArray(data)) {
-			throw new Error("Переданные данные должны быть массивом");
-		}
-
-		data.forEach(item => {
-			this.element.insertAdjacentHTML("beforeend", this.getAccountHTML(item));
-		});
+		this.element.insertAdjacentHTML("beforeend", this.getAccountHTML(item));
 	}
 }
