@@ -33,7 +33,7 @@ class AccountsWidget {
 	 * вызывает AccountsWidget.onSelectAccount()
 	 * */
 	registerEvents() {
-		this.element.addEventListener("click", () => {
+		this.element.addEventListener("click", (event) => {
 			const createAccountButton = event.target.closest(".create-account");
 			if (createAccountButton) {
 				App.getModal("createAccount").open();
@@ -60,7 +60,7 @@ class AccountsWidget {
 	update() {
 		const currentUser = User.current();
 		if (!currentUser) {
-			throw new Error("Ошибка");
+			return;
 		}
 
 		Account.list(currentUser, (err, response) => {
@@ -123,6 +123,6 @@ class AccountsWidget {
 	 * и добавляет его внутрь элемента виджета
 	 * */
 	renderItem(data) {
-		this.element.insertAdjacentHTML("beforeend", this.getAccountHTML(item));
+		this.element.insertAdjacentHTML("beforeend", this.getAccountHTML(data));
 	}
 }

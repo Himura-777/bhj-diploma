@@ -11,6 +11,12 @@
       "email": "tuananh.021105@gmail.com",
       "password": "12345",
       "id": "8p255i3om5v29bsl"
+    },
+    {
+      "name": "oleg",
+      "email": "oleg@demo.ru",
+      "password": "demo",
+      "id": "8p255g3gm62dcc00"
     }
   ],
   "accounts": [
@@ -28,6 +34,11 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
+    },
+    {
+      "name": "fgbfdgbdfb",
+      "user_id": "8p255g3gm62dcc00",
+      "id": "8p255fycm62drvru"
     }
   ],
   "transactions": [
@@ -165,6 +176,15 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "8p25564km62ds2wt",
+      "type": "income",
+      "name": "Ань",
+      "sum": 534544353,
+      "account_id": "8p255fycm62drvru",
+      "user_id": "8p255g3gm62dcc00",
+      "created_at": "2025-01-18T16:06:21.628Z"
     }
   ]
 }
